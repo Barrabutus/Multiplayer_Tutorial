@@ -9,9 +9,7 @@ using System;
 public class CreateRoom : MonoBehaviourPunCallbacks
 {
     public Text txt; 
-
     public DebugConsole _console;
-
     public bool _allowEmptyRooms;
 
     public void OnClickCreateRoom()
@@ -29,6 +27,8 @@ public class CreateRoom : MonoBehaviourPunCallbacks
     {
 
         _console.AddText("Room Created!...");
+        //If the room is created we put the owner into the room. 
+        PhotonNetwork.LoadLevel("RoomScene");
 
     }
     

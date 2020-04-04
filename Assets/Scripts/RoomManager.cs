@@ -10,12 +10,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Text txt; 
 
+    void Start()
+    {
+        SetRoomName();
+    }
 
-    // public void OnClickCreateRoom()
-    // {
+    public void SetRoomName()
+    {
+        txt.text = PhotonNetwork.CurrentRoom.Name;
+    }
 
-    //     PhotonNetwork.CreateRoom(txt.text, new RoomOptions{EmptyRoomTtl = 3000, MaxPlayers = Convert.ToByte(UnityEngine.Random.Range(2, 20)) });
 
-    // }
-    
 }

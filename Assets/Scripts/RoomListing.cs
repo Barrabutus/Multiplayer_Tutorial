@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Photon.Realtime;
+using Photon.Pun;
 
 public class RoomListing : MonoBehaviour
 {
@@ -17,6 +18,12 @@ public class RoomListing : MonoBehaviour
     public void SetFakeRoomInfo(string name, int players)
     {
         _text.text = name + " : " + players;
+    }
+
+    public void OnClickJoinRoom()
+    {
+
+        PhotonNetwork.JoinRoom(RoomInfo.Name);
     }
 
 }
