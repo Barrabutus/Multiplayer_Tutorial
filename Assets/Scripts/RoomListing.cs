@@ -22,8 +22,8 @@ public class RoomListing : MonoBehaviour
 
     public void OnClickJoinRoom()
     {
-
         PhotonNetwork.JoinRoom(RoomInfo.Name);
+        PhotonNetwork.LoadLevel("RoomScene");
     }
 
 }

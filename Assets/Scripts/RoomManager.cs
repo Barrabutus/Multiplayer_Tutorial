@@ -16,8 +16,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
 
     public void SetRoomName()
-    {
-        txt.text = PhotonNetwork.CurrentRoom.Name;
+    {  
+        //txt.text = PhotonNetwork.CurrentRoom.Name;
     }
 
 

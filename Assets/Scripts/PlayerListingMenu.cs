@@ -18,6 +18,9 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     
     public bool _fakePlayers;
 
+    public DebugConsole _console;
+
+
     public List<PlayerListing> listings = new List<PlayerListing>();
     private void Start() 
     {
@@ -41,15 +44,8 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        newPlayer.NickName = "TestingName";
-          PlayerListing listing = Instantiate(_playerListing,_content);
-                if(listing != null)
-                    listing.SetPlayerInfo(newPlayer);
-                    listings.Add(listing);
 
-        
-
-
+        AddPlayerListing(newPlayer);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -69,5 +65,45 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
                 }
 
     }
+
+    private void Awake() {
+        
+
+        GetCurrentRoomPlayers();
+
+
+    }
+
+    private void AddPlayerListing(Player player)
+    {
+            //player.NickName = player.NickName;
+          
+            PlayerListing listing = Instantiate(_playerListing,_content);
+                if(listing != null)
+                    listing.SetPlayerInfo(player);
+                    listings.Add(listing);
+    }
+
+    private void GetCurrentRoomPlayers()
+    {
+        if(PhotonNetwork.IsConnected)
+        {
+            _console.AddText("IS CONNECTED.");
+        }else{
+            _console.AddText("IS NOT CONNECTED");
+        }
+        
+        if(PhotonNetwork.InRoom)
+        {
+            foreach(KeyValuePair < int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
+            {
+                AddPlayerListing(playerInfo.Value);
+    
+            }
+        }else{
+            _console.AddText("Player is not in a room....");
+        }
+    }
+
 
 }

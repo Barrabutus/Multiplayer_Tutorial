@@ -21,6 +21,7 @@ public class Connection : MonoBehaviourPunCallbacks
     {
         _console.AddText("Connected to master");
         PhotonNetwork.JoinLobby();
+        PhotonNetwork.NickName = "Dribbler " + Random.Range(0,1999999);
 
     }
     public override void OnJoinedLobby()

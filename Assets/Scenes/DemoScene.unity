@@ -887,6 +887,7 @@ MonoBehaviour:
   _content: {fileID: 1901577257}
   _numFakeRooms: 25
   _fakeRooms: 0
+  _console: {fileID: 1119080090}
   listings: []
 --- !u!1 &1458920490
 GameObject:
@@ -1445,10 +1446,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 12
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0

@@ -14,12 +14,8 @@ public class CreateRoom : MonoBehaviourPunCallbacks
 
     public void OnClickCreateRoom()
     {
-        if(_allowEmptyRooms)
-        {
-            PhotonNetwork.CreateRoom(txt.text.ToUpper(), new RoomOptions{EmptyRoomTtl = 3000, MaxPlayers = Convert.ToByte(UnityEngine.Random.Range(2, 20)) });
-        }else{
+
             PhotonNetwork.CreateRoom(txt.text.ToUpper(), new RoomOptions{MaxPlayers = Convert.ToByte(UnityEngine.Random.Range(2, 20)) });
-        }
 
     }
 

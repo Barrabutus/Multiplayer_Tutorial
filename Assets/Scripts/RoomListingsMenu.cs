@@ -19,6 +19,11 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
     
     public bool _fakeRooms;
 
+    public DebugConsole _console;
+
+    public int X= 0;
+
+
     public List<RoomListing> listings = new List<RoomListing>();
 
 
@@ -30,10 +35,10 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
             for(int x = 0; x < _numFakeRooms; x++)
             {
             
-            RoomListing listing = Instantiate(_roomListingBtn,_content);
-            if(listing != null)
-                listing.SetFakeRoomInfo("Room " + x.ToString(), Random.Range(2, 10));
-                listings.Add(listing);
+                RoomListing listing = Instantiate(_roomListingBtn,_content);
+                if(listing != null)
+                    listing.SetFakeRoomInfo("Room " + x.ToString(), Random.Range(2, 10));
+                    listings.Add(listing);
 
                 
             }
@@ -41,12 +46,17 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
         }
 
     }
+    public override void OnJoinedRoom()
+    {
+        
 
+    }
 
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-
+        _console.AddText("FIRED ROOM LIST" + X);
+        X++;
         foreach(RoomInfo info in roomList)
         {
 
@@ -58,15 +68,12 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
                 if(index != -1)
                 {
                     //Destroy(listings[index]);
-                    listings[index].gameObject.SetActive(false);
-                        
+                    listings[index].gameObject.SetActive(false);                  
                     //Clean up the inactive rooms.
                     Destroy(listings[index].gameObject);
                     listings.RemoveAt(index); 
                     
                 }
-
-
             }else{
                 
                 RoomListing listing = Instantiate(_roomListingBtn,_content);
