@@ -307,10 +307,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 318327409}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72f34715cb4f2254884c7de16e9df7d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 557480f863cd0f14da7c5b980944a55f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 735792504}
+  userPanel: {fileID: 425404567}
+  userPrefab: {fileID: 1445532761957160272, guid: 66685b3cff97e644990423a3d4a759b3,
+    type: 3}
+  currentRoomPlayers: 
 --- !u!4 &318327411
 Transform:
   m_ObjectHideFlags: 0
@@ -455,7 +458,7 @@ MonoBehaviour:
   _playerListing: {fileID: -6019612710255691528, guid: 66685b3cff97e644990423a3d4a759b3,
     type: 3}
   _content: {fileID: 425404567}
-  _numFakePlayers: 10
+  _numFakePlayers: 0
   _fakePlayers: 0
   _console: {fileID: 640662393}
   listings: []

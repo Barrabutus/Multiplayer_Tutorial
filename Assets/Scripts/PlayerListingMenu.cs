@@ -41,10 +41,10 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         }
 
     }
-
+    
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-
+    
         AddPlayerListing(newPlayer);
     }
 
@@ -68,8 +68,12 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
 
     private void Awake() {
         
-
-        GetCurrentRoomPlayers();
+        if(PhotonNetwork.InRoom)
+        {
+            GetCurrentRoomPlayers();
+        }else{
+            _console.AddText("Player is not in a room unable to get players.");
+        }
 
 
     }
@@ -92,16 +96,15 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         }else{
             _console.AddText("IS NOT CONNECTED");
         }
-        
+
         if(PhotonNetwork.InRoom)
         {
+            
             foreach(KeyValuePair < int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
             {
                 AddPlayerListing(playerInfo.Value);
     
             }
-        }else{
-            _console.AddText("Player is not in a room....");
         }
     }
 
