@@ -1,52 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class _BrushManager : MonoBehaviour
+public class _BrushManager : MonoBehaviourPunCallbacks
 {
 
-    public bool isDragging = false;
-    public float startPosX; 
-    public float startPosY;
-
+    private bool isPainting;
     public GameObject paint;
-
+    public GameObject _brushObj;
     public List<Color> colors = new List<Color>();
+    public List<Vector2> BrushPositions = new List<Vector2>();
 
     // Start is called before the first frame update
-
+    private void Start() 
+    {
+              
+    }
     void Update()
     {
-        if(isDragging == true)
+        if(photonView.IsMine)
         {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            this.gameObject.transform.localPosition = new Vector3(mousePos.x, mousePos.y, 0);
+            if(Input.GetButtonDown("Fire1"))
+            {
+                if(!isPainting)
+                {
+                    isPainting = true;
+                    PhotonNetwork.Instantiate(_brushObj.name, new Vector3(0f,0f,0f), Quaternion.identity, 0);
 
-            Instantiate(paint,new Vector3(mousePos.x, mousePos.y, 0),Quaternion.identity);
-            
 
+                }
+            }
+            if(Input.GetButtonUp("Fire1"))
+            {
+                if(isPainting)
+                {
+                    isPainting = false;
+                }
+            }   
+    
         }
-
     }
-    private void OnMouseDown() {
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            Vector3 mousePos;
-            mousePos = Input.mousePosition;
-            mousePos = Camera.main.ScreenToWorldPoint(mousePos);
-            isDragging = true;
-            
-        }
-
-    }
-    private void OnMouseUp() {
-
-        isDragging = false;
-        
-    }
-
-
 }
+
+

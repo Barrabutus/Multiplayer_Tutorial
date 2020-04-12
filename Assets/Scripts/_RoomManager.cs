@@ -4,21 +4,48 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using Photon.Chat;
+using ExitGames.Client.Photon;
 
 public class _RoomManager : MonoBehaviourPunCallbacks
 {
-
     
         public Transform userPanel;
         public GameObject userPrefab;
         private int numPlayers;
         public List<int> currentRoomPlayers =new List<int>();
+        private static _RoomManager instance;
+
+        public bool isRoomFull;
+        public GameObject rdyBtn;
+        public _LobbyManager lobbyManager;
+        public _ChatManager chatManager;
+
+        private void Start() {
+            instance = this;
+
+        }
+        
 
         public override void OnJoinedRoom()
         {
             Debug.Log("User " + PhotonNetwork.NickName + " has joined the room...");
             StartCoroutine(RunUserListUpdate());
-            numPlayers  = PhotonNetwork.CurrentRoom.PlayerCount;         
+            //numPlayers  = PhotonNetwork.CurrentRoom.PlayerCount; 
+           // if(numPlayers == 1) {
+            //    chatManager.SetChatChannelName(PhotonNetwork.CurrentRoom.Name);
+                
+          //  }
+            chatManager.SetChatClientName(PhotonNetwork.NickName);
+            chatManager.client.PublishMessage(PhotonNetwork.CurrentRoom.Name, PhotonNetwork.NickName + " joined the room");
+            
+
+        
+        }
+
+        void Update() 
+        {
+           
         }
 
         
@@ -71,5 +98,16 @@ public class _RoomManager : MonoBehaviourPunCallbacks
         StartCoroutine(RunUserListUpdate());
     }
 
-    
+    public void OnClickLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+
+        PhotonNetwork.LoadLevel("NewScene");
+
+    }
+
 }
